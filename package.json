@@ -1,0 +1,22 @@
+{
+  "name": "chat-room-monorepo",
+  "private": true,
+  "version": "0.1.0",
+  "packageManager": "pnpm@10.26.2",
+  "type": "module",
+  "scripts": {
+    "dev": "node ./scripts/preflight-dev-ports.mjs && concurrently \"pnpm --filter @chat/server dev\" \"pnpm --filter @chat/web dev\"",
+    "dev:web": "pnpm --filter @chat/web dev",
+    "dev:server": "pnpm --filter @chat/server dev",
+    "build": "pnpm --filter @chat/protocol build && pnpm --filter @chat/core build && pnpm --filter @chat/server build && pnpm --filter @chat/web build",
+    "test": "pnpm --filter @chat/protocol test && pnpm --filter @chat/core test && pnpm --filter @chat/server test && pnpm --filter @chat/web test"
+  },
+  "devDependencies": {
+    "@types/node": "^24.6.0",
+    "concurrently": "^9.2.1",
+    "tsup": "^8.5.0",
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.3",
+    "vitest": "^3.2.4"
+  }
+}

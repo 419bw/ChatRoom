@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2048" height="1024" viewBox="0 0 2048 1024">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fce8d2" />
+      <stop offset="32%" stop-color="#f6c995" />
+      <stop offset="68%" stop-color="#c88756" />
+      <stop offset="100%" stop-color="#5a3c29" />
+    </linearGradient>
+    <radialGradient id="windowGlow" cx="72%" cy="35%" r="28%">
+      <stop offset="0%" stop-color="#fff7df" stop-opacity="0.98" />
+      <stop offset="38%" stop-color="#ffd49b" stop-opacity="0.78" />
+      <stop offset="100%" stop-color="#ffb362" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="lampGlow" cx="28%" cy="62%" r="18%">
+      <stop offset="0%" stop-color="#ffe3bc" stop-opacity="0.76" />
+      <stop offset="100%" stop-color="#ffb877" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+
+  <rect width="2048" height="1024" fill="url(#sky)" />
+  <ellipse cx="1470" cy="326" rx="460" ry="210" fill="url(#windowGlow)" />
+  <ellipse cx="580" cy="634" rx="300" ry="180" fill="url(#lampGlow)" />
+  <rect x="0" y="736" width="2048" height="288" fill="#4f3527" fill-opacity="0.72" />
+  <path d="M0 710 C180 760 390 690 620 746 C862 804 1068 696 1306 742 C1548 788 1796 706 2048 754 L2048 1024 L0 1024 Z" fill="#6d4934" fill-opacity="0.68" />
+  <path d="M0 126 C256 92 486 182 748 170 C1012 156 1288 72 1600 146 C1780 188 1920 206 2048 176 L2048 0 L0 0 Z" fill="#fff4df" fill-opacity="0.24" />
+</svg>
