@@ -28,23 +28,23 @@ export const JoinOverlay = ({
 
   return (
     <div className="join-overlay">
-      <div className="join-card">
-        <span className="eyebrow">Warm Lounge · 3D</span>
-        <h1>暖光会客室</h1>
-        <p>
-          选一个名字和基础形象就能进入休息室；入房后默认进入空间视角，
-          <code>Enter</code>
-          可直接聊天。
-        </p>
+      <div className="join-card join-card-animated">
+        <div className="join-header">
+          <span className="eyebrow">Warm Lounge · Evening</span>
+          <h1>暖光会客室</h1>
+          <p>
+            选一个名字和基础形象进入休息室。<br/>进房后可直接用 <code>Enter</code> 聊天。
+          </p>
+        </div>
 
         {errorMessage ? (
           <div className="join-issue join-issue--error" role="alert">
-            <strong>进入房间失败</strong>
+            <strong>连接受阻</strong>
             <span>{errorMessage}</span>
           </div>
         ) : null}
 
-        <label className="field">
+        <label className="field hover-field">
           <span>游客昵称</span>
           <input
             value={nickname}
@@ -81,17 +81,19 @@ export const JoinOverlay = ({
                 onClick={() => onAvatarChange(cosmetic)}
                 type="button"
               >
-                <span />
-                {avatarLabels[cosmetic]}
+                <div className="swatch-inner">
+                  <span className="swatch-indicator" />
+                  {avatarLabels[cosmetic]}
+                </div>
               </button>
             ))}
           </div>
         </div>
 
         <div className="join-footer">
-          <span>{statusText}</span>
-          <button onClick={onSubmit} disabled={busy || !nickname.trim()}>
-            {busy ? "连接中..." : errorMessage ? "重新进入" : "进入房间"}
+          <span className="status-text">{statusText}</span>
+          <button className="join-btn" onClick={onSubmit} disabled={busy || !nickname.trim()}>
+            {busy ? "正在连接..." : errorMessage ? "重新尝试" : "开启体验"}
           </button>
         </div>
       </div>

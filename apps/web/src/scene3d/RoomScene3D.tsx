@@ -1,9 +1,6 @@
-import {
-  ROOM_THEME,
-  type RoomEnvironmentVariant,
-  type RoomTheme,
-} from "@chat/protocol";
+import { ROOM_THEME, type RoomEnvironmentVariant, type RoomTheme } from "@chat/protocol";
 import { Canvas, useFrame, useLoader, useThree } from "@react-three/fiber";
+import { ContactShadows, Sparkles } from "@react-three/drei";
 import {
   Suspense,
   createContext,
@@ -276,25 +273,25 @@ const configureRoomMaterial = ({
   material.envMapIntensity =
     quality.roomVariant === "desktop"
       ? quality.tier === "desktop-high"
-        ? 1.25
-        : 1.08
-      : 0.72;
-  material.lightMapIntensity = lightingAsset.lightmapIntensity ?? 1;
+        ? 1.6
+        : 1.3
+      : 1.0;
+  material.lightMapIntensity = lightingAsset.lightmapIntensity ?? 1.1;
 
   if (objectName.includes("WindowGlass")) {
-    material.roughness = 0.08;
-    material.metalness = 0.03;
+    material.roughness = 0.02;
+    material.metalness = 0.6;
     material.transparent = true;
-    material.opacity = 0.92;
-    material.envMapIntensity = 1.4;
+    material.opacity = 0.45;
+    material.envMapIntensity = 2.8;
     return;
   }
 
   if (objectName.includes("LampShade") || objectName.includes("LampBulb")) {
-    material.roughness = 0.56;
-    material.emissive = new Color("#ffcc9a");
-    material.emissiveIntensity = mode === "preview" ? 1.65 : 1.45;
-    material.envMapIntensity = 0.35;
+    material.roughness = 0.35;
+    material.emissive = new Color("#ffaa66");
+    material.emissiveIntensity = mode === "preview" ? 2.5 : 2.0;
+    material.envMapIntensity = 0.8;
     return;
   }
 
@@ -303,24 +300,24 @@ const configureRoomMaterial = ({
     objectName.includes("SunBeam") ||
     objectName.includes("SunWash")
   ) {
-    material.roughness = 0.48;
-    material.emissive = new Color("#f7a95f");
-    material.emissiveIntensity = mode === "preview" ? 0.85 : 0.7;
-    material.envMapIntensity = 0.18;
+    material.roughness = 0.3;
+    material.emissive = new Color("#ff7a2f");
+    material.emissiveIntensity = mode === "preview" ? 1.2 : 0.9;
+    material.envMapIntensity = 0.4;
     return;
   }
 
   if (objectName.includes("Rug") || objectName.includes("Curtain")) {
-    material.roughness = 0.98;
-    material.metalness = 0.02;
-    material.envMapIntensity = 0.2;
+    material.roughness = 0.9;
+    material.metalness = 0.05;
+    material.envMapIntensity = 0.4;
     return;
   }
 
   if (objectName.includes("Sofa") || objectName.includes("Pillow")) {
-    material.roughness = 0.92;
-    material.metalness = 0.03;
-    material.envMapIntensity = 0.28;
+    material.roughness = 0.75;
+    material.metalness = 0.08;
+    material.envMapIntensity = 0.45;
     return;
   }
 
@@ -330,9 +327,9 @@ const configureRoomMaterial = ({
     objectName.includes("Shelf") ||
     objectName.includes("Book")
   ) {
-    material.roughness = Math.min(material.roughness, 0.68);
-    material.metalness = Math.max(material.metalness, 0.05);
-    material.envMapIntensity = 0.82;
+    material.roughness = Math.min(material.roughness, 0.4);
+    material.metalness = Math.max(material.metalness, 0.15);
+    material.envMapIntensity = 1.6;
     return;
   }
 
@@ -341,9 +338,9 @@ const configureRoomMaterial = ({
     objectName.includes("Ceiling") ||
     objectName.includes("Trim")
   ) {
-    material.roughness = 0.98;
-    material.metalness = 0.02;
-    material.envMapIntensity = 0.14;
+    material.roughness = 0.85;
+    material.metalness = 0.04;
+    material.envMapIntensity = 0.35;
     return;
   }
 
@@ -589,15 +586,13 @@ export const RoomCanvas3D = ({
       dpr={activeDpr}
       shadows={quality.shadowMode === "directional"}
       gl={{
-        antialias:
-          quality.antialias && quality.postprocessing.antialiasPass === "none",
-        powerPreference:
-          quality.tier === "mobile" ? "high-performance" : "default",
+        antialias: quality.antialias && quality.postprocessing.antialiasPass === "none",
+        powerPreference: quality.tier === "mobile" ? "high-performance" : "default",
       }}
       onCreated={({ gl }) => {
         gl.outputColorSpace = SRGBColorSpace;
         gl.toneMapping = ACESFilmicToneMapping;
-        gl.toneMappingExposure = quality.tier === "desktop-high" ? 1.16 : 1.1;
+        gl.toneMappingExposure = quality.tier === "desktop-high" ? 1.05 : 1.0;
         gl.shadowMap.enabled = quality.shadowMode === "directional";
         gl.shadowMap.type = PCFSoftShadowMap;
       }}
@@ -631,37 +626,29 @@ export const RoomScene3D = ({
       <SceneEnvironment environmentAsset={lightingAsset} />
       <color
         attach="background"
-        args={[mode === "preview" ? "#ead1b8" : "#e0c3a8"]}
+        args={[mode === "preview" ? "#140804" : "#1a0b06"]}
       />
       <fog
         attach="fog"
         args={[
-          mode === "preview" ? "#ebd0b3" : "#ddc1a6",
-          quality.roomVariant === "desktop" ? 21 : 23,
-          quality.roomVariant === "desktop" ? 56 : 52,
+          mode === "preview" ? "#221108" : "#1a0c06",
+          quality.roomVariant === "desktop" ? 16 : 18,
+          quality.roomVariant === "desktop" ? 60 : 56,
         ]}
       />
       <ambientLight
-        color="#fff2df"
-        intensity={mode === "preview" ? 0.34 : 0.27}
+        color="#ffccaa"
+        intensity={mode === "preview" ? 0.8 : 0.6}
       />
       <hemisphereLight
-        color="#fff8ef"
-        groundColor="#9f7355"
-        intensity={quality.roomVariant === "desktop" ? 0.28 : 0.22}
+        color="#ffb973"
+        groundColor="#2a1610"
+        intensity={quality.roomVariant === "desktop" ? 0.35 : 0.28}
       />
       <directionalLight
-        color="#ffd8aa"
-        position={[7.8, 7.1, -6.4]}
-        intensity={
-          quality.tier === "desktop-high"
-            ? mode === "preview"
-              ? 1.95
-              : 1.76
-            : mode === "preview"
-              ? 1.72
-              : 1.58
-        }
+        color="#ff8c3a"
+        position={[7.8, 6.1, -6.4]}
+        intensity={quality.tier === "desktop-high" ? 3.0 : 2.2}
         castShadow={quality.shadowMode === "directional"}
         shadow-mapSize-width={quality.shadowMapSize}
         shadow-mapSize-height={quality.shadowMapSize}
@@ -675,9 +662,9 @@ export const RoomScene3D = ({
         shadow-camera-far={22}
       />
       <directionalLight
-        color="#cadbff"
+        color="#6fa8ff"
         position={[-7.2, 5.8, 6.9]}
-        intensity={mode === "preview" ? 0.24 : 0.18}
+        intensity={mode === "preview" ? 1.2 : 0.9}
       />
       <pointLight
         color="#ffd7a6"
@@ -715,6 +702,12 @@ export const RoomScene3D = ({
           quality={quality}
           mode={mode}
         />
+        {quality.tier === "desktop-high" && (
+          <>
+            <ContactShadows resolution={1024} position={[0, 0.05, 0]} opacity={0.6} scale={14} blur={1.5} far={2.8} />
+            <Sparkles count={45} scale={8} size={2.5} speed={0.4} opacity={0.15} color="#ffb066" position={[0, 1.5, 0]} />
+          </>
+        )}
       </Suspense>
       {children}
       <ScenePostProcessing quality={quality} runtimePolicy={runtimePolicy} mode={mode} />

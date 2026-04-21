@@ -1,19 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
 :root {
-  color-scheme: light;
-  --bg-1: #f8e3ca;
-  --bg-2: #f0ceb0;
-  --panel: rgba(255, 243, 229, 0.84);
-  --panel-strong: rgba(255, 245, 233, 0.95);
-  --panel-border: rgba(149, 101, 56, 0.18);
-  --text-main: #442f22;
-  --text-soft: #775d49;
-  --accent: #dc8b55;
-  --accent-soft: #f2c28f;
-  --shadow: 0 26px 64px rgba(104, 57, 25, 0.18);
-  --radius-lg: 24px;
-  --radius-md: 18px;
-  --radius-sm: 12px;
-  font-family: "Microsoft YaHei UI", "PingFang SC", "Trebuchet MS", sans-serif;
+  color-scheme: dark light;
+  --bg-1: #1e130c;      /* Deep caramel dark */
+  --bg-2: #2a1610;      /* Warm dark sunset offset */
+  --panel: rgba(50, 26, 18, 0.65);
+  --panel-strong: rgba(68, 38, 25, 0.85);
+  --panel-border: rgba(255, 145, 77, 0.12);
+  --text-main: #fcf1e8;
+  --text-soft: #d3ab91;
+  --accent: #f28b46;
+  --accent-soft: #f7b486;
+  --shadow: 0 32px 64px rgba(0, 0, 0, 0.45);
+  --radius-lg: 28px;
+  --radius-md: 20px;
+  --radius-sm: 14px;
+  font-family: "Inter", "Microsoft YaHei UI", "PingFang SC", sans-serif;
+  letter-spacing: 0.01em;
 }
 
 * {
@@ -31,19 +34,23 @@ body,
 body {
   min-height: 100vh;
   background:
-    radial-gradient(circle at top, rgba(255, 243, 224, 0.84), transparent 38%),
-    radial-gradient(circle at 85% 18%, rgba(255, 191, 116, 0.2), transparent 30%),
-    linear-gradient(160deg, var(--bg-1), var(--bg-2));
+    radial-gradient(ellipse at top right, rgba(242, 139, 70, 0.15), transparent 45%),
+    radial-gradient(circle at bottom left, rgba(140, 50, 10, 0.2), transparent 50%),
+    linear-gradient(155deg, var(--bg-1), var(--bg-2));
   color: var(--text-main);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 button,
 input,
 textarea {
   font: inherit;
+  color: inherit;
 }
 
 button {
   border: none;
   cursor: pointer;
+  outline: none;
 }
